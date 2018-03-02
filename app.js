@@ -10,6 +10,9 @@ var users = require('./routes/users');
 
 var app = express();
 
+// application wide locals
+app.locals.siteName = 'invio-mail'
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
