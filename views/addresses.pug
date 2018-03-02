@@ -2,3 +2,6 @@ extends layout
 
 block content
   h1= siteName + " - " + pageName
+  ul
+    each address in addresses
+      li= address.email

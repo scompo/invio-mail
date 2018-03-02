@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var addresses = require('./routes/addresses');
 var mail = require('./routes/mail');
+var db = require('./data/database');
 
 var app = express();
 
@@ -27,6 +28,14 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.use("/addresses", function(req, res, next) {
+  res.locals.addresses = db.addresses.where(function(obj) {
+    return true;
+  });
+  next();
+});
 
 app.use('/', index);
 app.use('/addresses', addresses);
