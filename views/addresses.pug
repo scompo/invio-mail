@@ -3,5 +3,9 @@ extends layout
 block content
   h1= siteName + " - " + pageName
   ul
-    each address in addresses
-      li= address.email
+    each a in addresses
+      li= a.email
+  form(method='post', enctype='multipart/form-data')
+    label(for='user_addr')= 'Email address'
+    input#user_addr(type='email', name='user_addr')
+    input(type='submit', value='send')

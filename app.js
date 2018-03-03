@@ -7,8 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var addresses = require('./routes/addresses');
-var mail = require('./routes/mail');
-var db = require('./data/database');
+var mail = require('./routes/mails');
 
 var app = express();
 
@@ -29,17 +28,9 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.use("/addresses", function(req, res, next) {
-  res.locals.addresses = db.addresses.where(function(obj) {
-    return true;
-  });
-  next();
-});
-
 app.use('/', index);
 app.use('/addresses', addresses);
-app.use('/mail', mail);
+app.use('/mails', mail);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
