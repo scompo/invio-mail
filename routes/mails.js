@@ -1,17 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../data/database');
+var db = require('../database/database');
 var multer = require('multer');
 var upload = multer();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var mails = db.mails.where(function(obj) {
-    return true;
-  });
-  res.render('mails', {
-    pageName: 'mails',
-    mails: mails
+  db.mails.all(function(err, ms) {
+    res.render('mails', {
+      pageName: 'mails',
+      mails: ms
+    });
   });
 });
 
@@ -25,7 +24,7 @@ router.post('/', d, function(req, res, next) {
     text: req.body['user_text'],
     attachment: req.files['user_attachment']
   }
-  db.mails.insert(userEmail);
+  db.mails.save(userEmail);
   res.redirect('/mails');
 });
 

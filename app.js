@@ -8,6 +8,12 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var addresses = require('./routes/addresses');
 var mail = require('./routes/mails');
+var database = require('./database/database');
+
+database.setupDbs({
+  mails: 'data/mails.db',
+  addresses: 'data/addresses.db'
+});
 
 var app = express();
 
