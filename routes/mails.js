@@ -20,6 +20,7 @@ var d = upload.fields([{
 }])
 router.post('/', d, function(req, res, next) {
   var userEmail = {
+    from: req.body['user_from'],
     subject: req.body['user_subject'],
     text: req.body['user_text'],
     attachment: req.files['user_attachment']
