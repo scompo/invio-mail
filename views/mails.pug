@@ -2,16 +2,20 @@ extends layout
 
 block content
   h1= siteName + " - " + pageName
-  ul
-    each mail in mails
-      li= mail.subject
-  form(method='post', enctype='multipart/form-data')
-    label(for='user_from')= 'From'
-    input#user_from(type='email', name='user_from')
-    label(for='user_subject')= 'Email Subject'
-    input#user_subject(type='text', name='user_subject')
-    label(for='user_text')= 'Write your mail'
-    textarea#user_text(name='user_text')
-    label(for='user_attachment')= 'Add a file'
-    input#user_attachment(type='file', name='user_attachment')
-    input(type='submit', value='send')
+  section
+    h1= 'Existing addresses'
+    ul
+      each mail in mails
+        li= mail.subject
+  section
+    h1= 'Insert new email'
+    form(method='post', enctype='multipart/form-data')
+      label(for='user_from')= 'From'
+      input#user_from(type='email', name='user_from')
+      label(for='user_subject')= 'Email Subject'
+      input#user_subject(type='text', name='user_subject')
+      label(for='user_text')= 'Write your mail'
+      textarea#user_text(name='user_text')
+      label(for='user_attachment')= 'Add a file'
+      input#user_attachment(type='file', name='user_attachment')
+      input(type='submit', value='send')

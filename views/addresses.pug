@@ -2,10 +2,14 @@ extends layout
 
 block content
   h1= siteName + " - " + pageName
-  ul
-    each a in addresses
-      li= a.email
-  form(method='post', enctype='multipart/form-data')
-    label(for='user_addr')= 'Email address'
-    input#user_addr(type='email', name='user_addr')
-    input(type='submit', value='send')
+  section
+    h1= 'Existing addresses'
+    ul
+      each a in addresses
+        li= a.email
+  section
+    h1= 'Insert new address'
+    form(method='post', enctype='multipart/form-data')
+      label(for='user_addr')= 'Email address'
+      input#user_addr(type='email', name='user_addr')
+      input(type='submit', value='send')
