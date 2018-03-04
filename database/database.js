@@ -20,29 +20,50 @@ function setupDbs(conf) {
 }
 
 function allMails(callback) {
-  return db.mails.find({}, callback);
+  db.mails.find({}, callback);
 }
 
 function saveMail(mail, callback) {
   db.mails.insert(mail, callback);
 }
 
+function emailBySubject(s, callback) {
+  db.mails.findOne({
+    subject: s
+  }, callback);
+}
+
+function deleteAllEmails(callback) {
+  db.mails.remove({}, {
+    multi: true
+  }, callback);
+}
+
 function allAddresses(callback) {
-  return db.addresses.find({}, callback);
+  db.addresses.find({}, callback);
 }
 
 function saveAddress(addr, callback) {
   db.addresses.insert(addr, callback);
 }
 
+function deleteAllAddresses(callback) {
+  db.addresses.remove({}, {
+    multi: true
+  }, callback);
+}
+
 module.exports = {
   setupDbs: setupDbs,
   addresses: {
     all: allAddresses,
-    save: saveAddress
+    save: saveAddress,
+    deleteAll: deleteAllAddresses
   },
   mails: {
     all: allMails,
-    save: saveMail
+    save: saveMail,
+    bySubject: emailBySubject,
+    deleteAll: deleteAllEmails
   }
 };

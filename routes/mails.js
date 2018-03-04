@@ -7,9 +7,19 @@ var upload = multer();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   db.mails.all(function(err, ms) {
-    res.render('mails', {
+    res.render('mails/mails', {
       pageName: 'mails',
       mails: ms
+    });
+  });
+});
+
+router.get('/details', function(req, res, next) {
+  console.log(req.query.subject);
+  db.mails.bySubject(req.query.subject, function(err, m) {
+    res.render('mails/details', {
+      pageName: 'mail details',
+      mail: m
     });
   });
 });

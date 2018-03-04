@@ -7,7 +7,7 @@ var upload = multer();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   db.addresses.all(function(err, adds) {
-    res.render('addresses', {
+    res.render('addresses/addresses', {
       pageName: 'addresses',
       addresses: adds
     });
