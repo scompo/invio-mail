@@ -1,8 +1,9 @@
 extends layout
 
 block content
-  h1= siteName
-  p Welcome to #{siteName}
+  h2(class=['subtitle-header'])= siteName
+  p Welcome to #{siteName}.
+  h3= 'available opertaions'
   ul
     li: a(href='/addresses') Addresses
     li: a(href='/mails') Mails

@@ -10,3 +10,8 @@ a {
 form {
   display: grid;
 }
+
+.subtitle-header, .title-header{
+  display: inline;
+  padding: 5px;
+}
