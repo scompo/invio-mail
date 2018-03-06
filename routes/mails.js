@@ -4,12 +4,20 @@ var db = require('../database/database');
 var multer = require('multer');
 var upload = multer();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
   db.mails.all(function(err, ms) {
-    res.render('mails/mails', {
+    res.render('mails/all', {
       pageName: 'mails',
       mails: ms
+    });
+  });
+});
+
+router.get('/new', function(req, res, next) {
+  db.mails.all(function(err, ms) {
+    res.render('mails/new', {
+      backPage: 'mails',
+      pageName: 'new',
     });
   });
 });
@@ -18,7 +26,7 @@ router.get('/details', function(req, res, next) {
   db.mails.bySubject(req.query.subject, function(err, m) {
     res.render('mails/details', {
       backPage: 'mails',
-      pageName: 'detail',
+      pageName: 'details',
       mail: m
     });
   });

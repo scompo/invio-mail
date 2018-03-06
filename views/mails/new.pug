@@ -1,15 +1,10 @@
 extends ../layout
 
 block content
-  h2(class=['subtitle-header'])= pageName
+  h2(class=['subtitle-header']) 
+    a(href='/mails')=backPage
   section
-    h1= 'Existing addresses'
-    ul
-      each mail in mails
-        li
-          a(href='/mails/details?subject='+mail.subject)= mail.subject
-  section
-    h1= 'Insert new email'
+    h1= 'Insert a new email'
     form(method='post', enctype='multipart/form-data', action='/mails')
       label(for='user_from')= 'From'
       input#user_from(type='email', name='user_from')

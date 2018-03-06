@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  h2(class=['subtitle-header'])= pageName
+  section
+    h1= 'Options'
+    a(href='/mails/new')= 'Create a new email'
+  section
+    h1= 'Existing emails'
+    ul
+      each mail in mails
+        li
+          a(href='/mails/details?subject='+mail.subject)= mail.subject
