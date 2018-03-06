@@ -1,16 +1,18 @@
 extends ../layout
 
 block content
+  h2(class=['subtitle-header']) 
+    a(href='/mails')=backPage
   h2(class=['subtitle-header'])= pageName
   section
     h1= 'Edit email'
-    form(method='post', enctype='multipart/form-data')
+    form(method='post', enctype='multipart/form-data', action='/mails/update')
       label(for='user_from')= 'From'
       input#user_from(type='email', name='user_from', value=mail.from)
       label(for='user_subject')= 'Email Subject'
       input#user_subject(type='text', name='user_subject' value=mail.subject)
-      label(for='user_text')= 'Write your mail'
+      label(for='user_text')= 'Email text'
       textarea#user_text(name='user_text')= mail.text
-      label(for='user_attachment')= 'Add a file'
+      label(for='user_attachment')= 'Edit the file'
       input#user_attachment(type='file', name='user_attachment')
       input(type='submit', value='send')

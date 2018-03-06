@@ -18,9 +18,26 @@ router.get('/details', function(req, res, next) {
   console.log(req.query.subject);
   db.mails.bySubject(req.query.subject, function(err, m) {
     res.render('mails/details', {
-      pageName: 'mail details',
+      backPage: 'mails',
+      pageName: 'detail',
       mail: m
     });
+  });
+});
+
+var d1 = upload.fields([{
+  name: 'user_attachment',
+  maxCount: 8
+}])
+router.post('/update', d1, function(req, res, next) {
+  var userEmail = {
+    from: req.body['user_from'],
+    subject: req.body['user_subject'],
+    text: req.body['user_text'],
+    attachment: req.files['user_attachment']
+  }
+  db.mails.update(userEmail, function(err, numAffected, affectedDocuments, upsert) {
+    res.redirect('/mails');
   });
 });
 

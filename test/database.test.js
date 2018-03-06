@@ -88,6 +88,50 @@ describe('database', function() {
         });
       });
     });
+    describe('#update()', function() {
+      it('Updates an existing email', function(done) {
+        db.mails.save({
+          from: "name@mail.dom",
+          subject: "test email",
+          data: "blah"
+        }, function(err, newDoc) {
+          db.mails.update({
+            from: "second@mail.dom",
+            subject: "test email",
+            data: "blah2"
+          }, function() {
+            db.mails.bySubject("test email", function(err, doc) {
+              expect(doc).to.be.a('Object');
+              expect(err).to.be.null;
+              expect(doc.from).to.equal('second@mail.dom');
+              expect(doc.subject).to.equal('test email');
+              expect(doc.data).to.equal('blah2');
+              db.mails.deleteAll(function() {
+                done();
+              });
+            });
+          });
+        });
+      });
+      it('Inserts a new email if not present', function(done) {
+        db.mails.update({
+          from: "second@mail.dom",
+          subject: "test email",
+          data: "blah2"
+        }, function() {
+          db.mails.bySubject("test email", function(err, doc) {
+            expect(doc).to.be.a('Object');
+            expect(err).to.be.null;
+            expect(doc.from).to.equal('second@mail.dom');
+            expect(doc.subject).to.equal('test email');
+            expect(doc.data).to.equal('blah2');
+            db.mails.deleteAll(function() {
+              done();
+            });
+          });
+        });
+      });
+    });
     describe('#deleteAll()', function() {
       it('deletes all emails', function(done) {
         db.mails.save({

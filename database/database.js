@@ -39,6 +39,14 @@ function deleteAllEmails(callback) {
   }, callback);
 }
 
+function updateEmail(m, callback) {
+  db.mails.update({
+    subject: m.subject
+  }, m, {
+    upsert: true
+  }, callback);
+}
+
 function allAddresses(callback) {
   db.addresses.find({}, callback);
 }
@@ -64,6 +72,7 @@ module.exports = {
     all: allMails,
     save: saveMail,
     bySubject: emailBySubject,
-    deleteAll: deleteAllEmails
+    deleteAll: deleteAllEmails,
+    update: updateEmail
   }
 };
