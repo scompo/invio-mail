@@ -5,6 +5,9 @@ block content
     a(href='/mails')=backPage
   h2(class=['subtitle-header'])= pageName
   section
+    h1= 'Delete email'
+    a(href='/mails/delete?subject=' + mail.subject)= 'Delete'
+  section
     h1= 'Edit email'
     form(method='post', enctype='multipart/form-data', action='/mails/update')
       label(for='user_from')= 'From'

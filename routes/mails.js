@@ -15,13 +15,18 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/details', function(req, res, next) {
-  console.log(req.query.subject);
   db.mails.bySubject(req.query.subject, function(err, m) {
     res.render('mails/details', {
       backPage: 'mails',
       pageName: 'detail',
       mail: m
     });
+  });
+});
+
+router.get('/delete', function(req, res, next) {
+  db.mails.delete(req.query.subject, function(err, m) {
+    res.redirect('/mails');
   });
 });
 

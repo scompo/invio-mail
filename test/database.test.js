@@ -150,6 +150,34 @@ describe('database', function() {
         })
       });
     });
+    describe('#delete()', function() {
+      it('deletes an existing email', function(done) {
+        db.mails.save({
+          from: "name@mail.dom",
+          subject: "test email",
+          data: "blah"
+        }, function() {
+          db.mails.delete("test email", function(err, numRemoved) {
+            expect(err).to.be.null;
+            expect(numRemoved).to.be.a('Number');
+            db.mails.all(function(err, docs) {
+              expect(docs).to.have.lengthOf(0);
+              done();
+            });
+          });
+        })
+      });
+      it('throws no error deleting something that does not exist', function(done) {
+        db.mails.delete("test email", function(err, numRemoved) {
+          expect(err).to.be.null;
+          expect(numRemoved).to.be.a('Number');
+          db.mails.all(function(err, docs) {
+            expect(docs).to.have.lengthOf(0);
+            done();
+          });
+        });
+      });
+    });
     describe('#bySubject()', function() {
       it('returns the correct email by subject', function(done) {
         db.mails.save({
