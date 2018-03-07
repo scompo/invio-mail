@@ -5,9 +5,6 @@ block content
     a(href='/mails')=backPage
   h2(class=['subtitle-header'])= pageName
   section
-    h1= 'Delete email'
-    a(href='/mails/delete?subject=' + mail.subject)= 'Delete'
-  section
     h1= 'Edit email'
     form(method='post', enctype='multipart/form-data', action='/mails/update')
       label(for='user_from')= 'From'
@@ -19,3 +16,6 @@ block content
       label(for='user_attachment')= 'Edit the file'
       input#user_attachment(type='file', name='user_attachment')
       input(type='submit', value='send')
+    section
+      h1= 'Delete email'
+      a(href='/mails/delete?subject=' + mail.subject)= 'Delete'
