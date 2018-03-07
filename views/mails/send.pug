@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h2(class=['subtitle-header']) 
+    a(href='/mails')=backPage
+  h2(class=['subtitle-header'])= pageName
+  section
+    h1= 'Email'
+    section(class=['section-details'])
+      label(for='from')= 'From:'
+      p#from(name='from')= mail.from
+      label(for='subject')= 'Subject:'
+      p#subject(name='subject')= mail.subject
+      label(for='mail-body')= 'Body preview:'
+      p#mail-body(name='mail-body')= mail.text.split('\n')[0]+"..."
+  section
+    h1= 'Addresses'
+    ul
+      each addr in addresses
+        li=addr.email
+  section
+    h1= 'Server configuration'
+  

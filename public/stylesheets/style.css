@@ -11,7 +11,23 @@ form {
   display: grid;
 }
 
-.subtitle-header, .title-header{
+label {
+  text-decoration: underline;
+}
+
+input {
+  margin: 10px;
+}
+
+textarea {
+  margin: 10px;
+}
+
+.subtitle-header, .title-header {
   display: inline;
   padding: 5px;
+}
+
+.section-details, p {
+  margin: 10px;
 }

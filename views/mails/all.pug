@@ -9,5 +9,8 @@ block content
     h1= 'Existing emails'
     ul
       each mail in mails
-        li
-          a(href='/mails/details?subject='+mail.subject)= mail.subject
+        li= mail.subject
+          a(href='/mails/details?subject='+mail.subject)
+            img(src='/images/edit-icon.png', height='16', width='16')
+          a(href='/mails/send?subject='+mail.subject)
+            img(src='/images/email-icon.png', height='16', width='16')

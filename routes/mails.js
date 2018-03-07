@@ -32,6 +32,19 @@ router.get('/details', function(req, res, next) {
   });
 });
 
+router.get('/send', function(req, res, next) {
+  db.mails.bySubject(req.query.subject, function(err, m) {
+    db.addresses.all(function(err, adds) {
+      res.render('mails/send', {
+        backPage: 'mails',
+        pageName: 'send',
+        mail: m,
+        addresses: adds
+      });
+    });
+  });
+});
+
 router.get('/delete', function(req, res, next) {
   db.mails.delete(req.query.subject, function(err, m) {
     res.redirect('/mails');
